@@ -7,16 +7,14 @@
     <title>Weather Forecast</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
     <link rel="stylesheet" href="Assets/styles.css" />
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script defer src="Assets/script.js"></script>
+    
 </head>
 
 <body>
     <section class="hero is-primary has-text-centered">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
+                <h1 class="title is-size-1">
                     <i class="fa fa-sun fa-spin fa-1x"></i> Weather Dashboard
                     <i class="fa fa-snowflake fa-spin fa-1x"></i>
                 </h1>
@@ -26,37 +24,106 @@
             </div>
         </div>
     </section>
+
     <section>
-        <div class="container">
+        <div class="container mt-6">
             <div class="columns">
-                <div class="column">
-                    <p class="bd-notification is-primary">
-                        First column Sint irure fugiat incididunt ipsum consequat id
-                        officia elit fugiat magna consequat laboris commodo enim. Proident
-                        adipisicing nostrud fugiat occaecat anim laboris dolore non
-                        ullamco ex duis occaecat. Quis velit voluptate officia qui aliqua
-                        cupidatat amet veniam cupidatat dolor incididunt quis
-                        reprehenderit. Nulla labore voluptate et adipisicing anim. Ipsum
-                        cillum irure ipsum incididunt irure occaecat magna. Esse occaecat
-                        voluptate labore ex cupidatat voluptate ea. Ex anim incididunt
-                        dolor in elit tempor do ad sunt aliqua eiusmod. Laborum ut duis
-                        sint aliqua adipisicing reprehenderit ipsum velit commodo ea nulla
-                        magna ut. Cillum ut ipsum non aute laboris amet sint do
-                        exercitation incididunt enim voluptate magna. Anim ea ipsum magna
-                        labore ad sint nisi. Irure irure quis commodo qui eu excepteur
-                        elit nulla tempor. Aliquip anim aute labore do et aliquip ad. Anim
-                        commodo do sunt nostrud in amet mollit dolor do nulla. Adipisicing
-                        irure aliqua velit cupidatat elit do esse occaecat ad irure ad
-                        ullamco. Nulla ullamco mollit duis consectetur reprehenderit
-                        labore non ipsum elit do id nulla.
-                    </p>
+                <div class="column is-4">
+                    <nav class="panel">
+                        <p class="panel-heading">
+                            Search for a city:
+                        </p>
+                        <div class="panel-block has-addons">
+                            <p class="control has-icons-left">
+                                <input id="city-search" class="input is-small" type="text"
+                                    placeholder="Enter your city here">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search" aria-hidden="true"></i>
+                                </span>
+                            </p>
+                            <div class="control">
+                                <button type="submit" class="button is-info is-small" id="search-btn">GO</button>
+                            </div>
+                        </div>
+
+                        <div id="saved-searches">
+                        <a class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fas fa-city" aria-hidden="true"></i>
+                            </span>
+                            previous search eg</a>
+                        <a class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fas fa-city" aria-hidden="true"></i>
+                            </span>
+                            previous search eg</a>
+
+                        <div class="panel-block">
+                            <button class="button is-link is-outlined is-fullwidth">
+                                reset all filters
+                            </button>
+                        </div>
+                        </div>
+                    </nav>
                 </div>
-                <div class="column">
-                    Second column
+
+                <div class="column is-8">
+
+                    <div class="card">
+                        <div class="card-content">
+                            <h4>Sydney
+                                <h4>25/06/2020</h4>
+                                <img src="https://openweathermap.org/img/w/01d.png">
+                            </h4>
+                            <div class="content">
+                                <p class="card-text current-temp">Temperature: 63 °F</p>
+                                <p class="card-text current-humidity">Humidity: 48%</p>
+                                <p class="card-text current-wind">Wind Speed: 6.2 MPH</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h1 class="mt-6">5 day forecast:</h1>
+                    <div class="columns">
+                        <div class="column mt-6 mx-3 has-background-info">
+                            <h4>the data</h4>
+                            <img src="https://openweathermap.org/img/w/10n.png">
+                            <p class="card-text forecastTemp">Temp: 55 °F</p>
+                            <p class="card-text forecastHumidity">Humidity: 67%</p>
+                        </div>
+                        <div class="column mt-6 mx-3 has-background-info">
+                            <h4>the data</h4>
+                            <img src="https://openweathermap.org/img/w/10n.png">
+                            <p class="card-text forecastTemp">Temp: 55 °F</p>
+                            <p class="card-text forecastHumidity">Humidity: 67%</p>
+                        </div>
+                        <div class="column mt-6 mx-3 has-background-info">
+                            <h4>the data</h4>
+                            <img src="https://openweathermap.org/img/w/10n.png">
+                            <p class="card-text forecastTemp">Temp: 55 °F</p>
+                            <p class="card-text forecastHumidity">Humidity: 67%</p>
+                        </div>
+                        <div class="column mt-6 mx-3 has-background-info">
+                            <h4>the data</h4>
+                            <img src="https://openweathermap.org/img/w/10n.png">
+                            <p class="card-text forecastTemp">Temp: 55 °F</p>
+                            <p class="card-text forecastHumidity">Humidity: 67%</p>
+                        </div>
+                        <div class="column mt-6 mx-3 has-background-info">
+                            <h4>the data</h4>
+                            <img src="https://openweathermap.org/img/w/10n.png">
+                            <p class="card-text forecastTemp">Temp: 55 °F</p>
+                            <p class="card-text forecastHumidity">Humidity: 67%</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+<script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="Assets/script.js"></script>
 </body>
 
 </html>
