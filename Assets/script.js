@@ -1,22 +1,23 @@
 //add searches to save list
 function savedSearches() {
   const city = $(".input").val();
-    let a = $("<a>").addClass("panel-block");
-    let span = $("<span>").addClass("panel-icon")
-    let i = $("<i>").addClass("fas fa-city")
-    let p = $("<p>").text(city);
-    span.append(i);
-    a.append(span);
-    a.append(p)
-    $("#saved-searches").append(a);
+  let a = $("<a>").addClass("panel-block");
+  let span = $("<span>").addClass("panel-icon");
+  let i = $("<i>").addClass("fas fa-city");
+  let p = $("<p>").text(city);
+  span.append(i);
+  a.append(span);
+  a.append(p);
+  $("#saved-searches").append(a);
 }
 
-$(document).on("click", ".panel-block", function(){
-    $(".panel-block").removeClass("is-active");
-    $(this).addClass("is-active");
-})
+$(document).on("click", ".panel-block", function () {
+  $(".panel-block").removeClass("is-active");
+  $(this).addClass("is-active");
+  currentWeather();
+});
 
-// this function allows submit on enter key press 
+// this function allows submit on enter key press
 $("#city-search").keypress(function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();
@@ -26,9 +27,9 @@ $("#city-search").keypress(function (event) {
 
 $("#search-btn").on("click", function () {
   document.querySelector("#weather-data").removeAttribute("hidden");
-  savedSearches()
+  savedSearches();
   currentWeather();
-  forecastWeather()
+  forecastWeather();
   $("#city-search").val("");
 });
 
@@ -43,7 +44,7 @@ function currentWeather() {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    ``
+    console.log(response);
     //Sets the city name for the weather data. Also sets the date with moment.js
     document.querySelector("#current-city").textContent = response.name;
     document.querySelector("#current-date").textContent = moment().format(
@@ -52,7 +53,7 @@ function currentWeather() {
     //Sets the weather icon
     document.querySelector("#current-weather-pic").src =
       "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
-    
+
     //sets the alt text to match the icon
     document.querySelector("#current-weather-pic").alt =
       response.weather[0].description;
@@ -65,6 +66,41 @@ function currentWeather() {
       "Himidity: " + response.main.humidity + "%";
     document.querySelector("#current-wind").textContent =
       "Wind speed: " + response.wind.speed + "MPH";
+
+    const lat = "&lat=" + response.coord.lat;
+    const long = "&lon=" + response.coord.lon;
+    const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
+    const queryURL =
+      "http://api.openweathermap.org/data/2.5/uvi?" + apiKey + lat + long;
+    console.log(queryURL);
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).then(function (response) {
+      console.log(response);
+      //gets the uv index for searched city and adds to the span element
+      document.querySelector("#current-uv").textContent =
+        "UV Index: " + response.value;
+
+      //low 1-2, moderate 3-5, or high 6-7, 8-10 very high, 11+ extreme according to http://www.bom.gov.au/uv
+      if (response.value <= 2) {
+        document
+          .querySelector("#current-uv")
+          .classList.add("has-text-white has-background-success-dark");
+      }
+
+      if (response.value <= 5 && response.value >= 3) {
+        document
+          .querySelector("#current-uv")
+          .classList.add("has-text-white has-background-warning-dark");
+      }
+
+      if (response.value >= 6 && response.value <= 11) {
+        document
+          .querySelector("#current-uv")
+          .classList.add("has-text-white has-background-danger-dark");
+      }
+    });
   });
 }
 
@@ -81,4 +117,4 @@ function forecastWeather() {
   }).then(function (response) {
     console.log(response);
   });
-};
+}
