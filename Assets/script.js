@@ -1,4 +1,4 @@
-//add searches to save list
+//add searched cities to save list
 function savedSearches() {
   const city = $(".input").val();
   let a = $("<a>").addClass("panel-block");
@@ -11,10 +11,12 @@ function savedSearches() {
   $("#saved-searches").append(a);
 }
 
+//this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
 $(document).on("click", ".panel-block", function () {
   $(".panel-block").removeClass("is-active");
   $(this).addClass("is-active");
-  currentWeather();
+  let city = $(this).text();
+  currentWeather(city);
 });
 
 // this function allows submit on enter key press
@@ -25,17 +27,19 @@ $("#city-search").keypress(function (event) {
   }
 });
 
+
 $("#search-btn").on("click", function () {
   document.querySelector("#weather-data").removeAttribute("hidden");
-  savedSearches();
-  currentWeather();
-  forecastWeather();
+  const city = $(".input").val();
+  savedSearches(city);
+  currentWeather(city);
+  forecastWeather(city);
   $("#city-search").val("");
 });
 
 //this function retrieves api data and creates elements to populate the weather-data card with api data.
-function currentWeather() {
-  const city = $(".input").val();
+function currentWeather(city) {
+  // const city = $(".input").val();
   const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
   const queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
@@ -105,8 +109,8 @@ function currentWeather() {
 }
 
 //this function retrieves api forecast data and creates elements to populate the 5 day forecast cards with api data.
-function forecastWeather() {
-  const city = $(".input").val();
+function forecastWeather(city) {
+  // const city = $(".input").val();
   const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
   const queryURL =
     "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey;
