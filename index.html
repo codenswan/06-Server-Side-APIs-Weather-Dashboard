@@ -7,7 +7,7 @@
     <title>Weather Forecast</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
     <link rel="stylesheet" href="Assets/styles.css" />
-    
+
 </head>
 
 <body>
@@ -47,38 +47,30 @@
                         </div>
 
                         <div id="saved-searches">
-                        <a class="panel-block">
-                            <span class="panel-icon">
-                                <i class="fas fa-city" aria-hidden="true"></i>
-                            </span>
-                            previous search eg</a>
-                        <a class="panel-block">
-                            <span class="panel-icon">
-                                <i class="fas fa-city" aria-hidden="true"></i>
-                            </span>
-                            previous search eg</a>
+                            
 
+                        </div>
                         <div class="panel-block">
                             <button class="button is-link is-outlined is-fullwidth">
-                                reset all filters
+                                Reset
                             </button>
-                        </div>
                         </div>
                     </nav>
                 </div>
 
                 <div class="column is-8">
-
-                    <div class="card">
+                    <div hidden class="card" id="weather-data">
                         <div class="card-content">
-                            <h4>Sydney
-                                <h4>25/06/2020</h4>
-                                <img src="https://openweathermap.org/img/w/01d.png">
-                            </h4>
+                            <div>
+                                <p class="is-size-2" id="current-city"></p>
+                                <p class="is-size-4" id="current-date"></p>
+                                <img id="current-weather-pic" >
+                                <!-- src="https://openweathermap.org/img/w/01d.png" -->
+                            </div>
                             <div class="content">
-                                <p class="card-text current-temp">Temperature: 63 °F</p>
-                                <p class="card-text current-humidity">Humidity: 48%</p>
-                                <p class="card-text current-wind">Wind Speed: 6.2 MPH</p>
+                                <p class="card-text"><span id="current-temp"></span></p>
+                                <p class="card-text"><span id="current-humidity"></span></p>
+                                <p class="card-text"><span id="current-wind"></span></p>
                             </div>
                         </div>
                     </div>
@@ -121,9 +113,10 @@
             </div>
         </div>
     </section>
-<script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="Assets/script.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="Assets/script.js"></script>
 </body>
 
 </html>
