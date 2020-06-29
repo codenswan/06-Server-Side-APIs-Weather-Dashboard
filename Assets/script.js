@@ -4,14 +4,14 @@ function citySearchList() {
   const a = $("<a>").addClass("panel-block");
   const span = $("<span>").addClass("panel-icon");
   const i = $("<i>").addClass("fas fa-city");
-  const p = $("<p>").text(city);
+  const p = $(`<p onclick="currentWeather('${city}')">`).text(city);
   span.append(i);
   a.append(span);
   a.append(p);
   $("#saved-searches").append(a);
 }
 
-// this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
+//this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
 $(document).on("click", "#saved-searches", function () {
   $(".panel-block").removeClass("is-active");
   $(this).addClass("is-active");
@@ -139,7 +139,7 @@ function forecastWeather(city) {
     let forecastResult = response.list;
 
     for (let i = 0; i < forecastResult.length; i++) {
-      
+      console.log(forecastResult);
       if (forecastResult[i].dt_txt.indexOf("12:00:00") !== -1) {
         // convert temp to fahrenheit
         let temp = (forecastResult[i].main.temp - 273.15) * 1.8 + 32;
@@ -148,7 +148,9 @@ function forecastWeather(city) {
         const dayCol = $("<div>").addClass(
           "column mt-6 mx-3 has-background-info"
         );
-        const date = $("<p>").text(moment().format("MMMM Do YYYY"));
+        const date = $("<p>").text(
+          new Date(forecastResult[i].dt_txt).toLocaleDateString()
+        );
 
         const icon = $("<img>").attr(
           "src",
