@@ -1,10 +1,12 @@
+const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
+
 //add searched cities to save list
 function citySearchList() {
   const city = $(".input").val();
-  const a = $("<a>").addClass("panel-block");
+  const a = $("<a>").addClass("panel-block").attr("data-city", city);
   const span = $("<span>").addClass("panel-icon");
   const i = $("<i>").addClass("fas fa-city");
-  const p = $(`<p onclick="currentWeather('${city}')">`).text(city);
+  const p = $("<p>").text(city);
   span.append(i);
   a.append(span);
   a.append(p);
@@ -12,11 +14,12 @@ function citySearchList() {
 }
 
 //this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
-$(document).on("click", "#saved-searches", function () {
+$("#saved-searches").on("click", "a", function () {
   $(".panel-block").removeClass("is-active");
   $(this).addClass("is-active");
-  let city = $(this).text();
+  let city = $(this).attr("data-city");
   currentWeather(city);
+  forecastWeather(city);
 });
 
 // this function allows submit on enter key press
@@ -44,9 +47,10 @@ $("#search-btn").on("click", function () {
 
 //this function retrieves api data and creates elements to populate the weather-data card with api data.
 function currentWeather(city) {
-  if (!city) return;
+  if (!city) {
+    return};
 
-  const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
+  // const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
   const queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
 
@@ -88,7 +92,7 @@ function currentWeather(city) {
 
 //the lat and lon info from the ajax response in the previous function is pass into uvIndex to get the correct city's data
 function uvIndex(response) {
-  const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
+  // const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
   const queryURL = `http://api.openweathermap.org/data/2.5/uvi?${apiKey}&lat=${response.coord.lat}&lon=${response.coord.lon}`;
 
   $.ajax({
