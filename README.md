@@ -6,7 +6,7 @@ This weather dashboard utilises data provided by the open weather api (https://o
   - 5 day weather forecast https://openweathermap.org/forecast5
   
 Below is a screenshot of the deployed app.
-![](06-Server-Side-APIs-Weather-Dashboard/Assets/Screen%20Shot%202020-06-30%20at%202.10.47%20pm.png)
+![](Assets/Screen%20Shot%202020-06-30%20at%202.10.47%20pm.png)
   
 # Application Features
 After completing your first city search current and future weather data is displayed on the screen, and the city searched is added to your recent cities on the left hand side of the page. The last searched for city information is stored in localStorage, allowing you to refresh the page and still have the previously searched cities displayed as well as the previous city weather information still displayed on the page. Additionally, if you search for a city multiple times it will only be added to the search history once.
