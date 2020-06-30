@@ -1,17 +1,31 @@
 const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
+let savedCities = [];
 
 //add searched cities to save list
-function citySearchList() {
-  const city = $(".input").val();
-  const a = $("<a>").addClass("panel-block").attr("data-city", city);
-  const span = $("<span>").addClass("panel-icon");
-  const i = $("<i>").addClass("fas fa-city");
-  const p = $("<p>").text(city);
-  span.append(i);
-  a.append(span);
-  a.append(p);
-  $("#saved-searches").append(a);
+function renderCitySearchList() {
+  $("#saved-searches").empty();
+  for (let index = 0; index < savedCities.length; index++) {
+    let cityName = savedCities[index];
+
+    // const city = $(".input").val();
+    const a = $("<a>").addClass("panel-block").attr("data-city", cityName);
+    const span = $("<span>").addClass("panel-icon");
+    const i = $("<i>").addClass("fas fa-city");
+    const p = $("<p>").text(cityName);
+    span.append(i);
+    a.append(span);
+    a.append(p);
+    $("#saved-searches").append(a);
+  }
 }
+
+$("#clear-local-storage").on("click", function () {
+  localStorage.clear();
+  savedCities = []
+  $("#saved-searches").empty();
+  $("#weather-data").removeAttr("hidden");
+  $(".container").removeAttr("hidden");
+});
 
 //this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
 $("#saved-searches").on("click", "a", function () {
@@ -20,6 +34,8 @@ $("#saved-searches").on("click", "a", function () {
   let city = $(this).attr("data-city");
   currentWeather(city);
   forecastWeather(city);
+  $("#weather-data").removeAttr("hidden");
+  $(".container").removeAttr("hidden");
 });
 
 // this function allows submit on enter key press
@@ -33,14 +49,13 @@ $("#city-search").keypress(function (event) {
 $("#search-btn").on("click", function () {
   $("#weather-data").removeAttr("hidden");
   $(".container").removeAttr("hidden");
-  const city = $(".input").val();
-  const savedCities = []
-  savedCities.push(city)
-  localStorage.setItem("savedCities", JSON.stringify(savedCities))
-  console.log(localStorage)
+  const city = $(".input").val().trim();
+  savedCities.push(city);
+  localStorage.setItem("savedCities", JSON.stringify(savedCities));
+  
   currentWeather(city);
-  citySearchList();
   forecastWeather(city);
+  renderCitySearchList();
 
   $("#city-search").val("");
 });
@@ -48,9 +63,9 @@ $("#search-btn").on("click", function () {
 //this function retrieves api data and creates elements to populate the weather-data card with api data.
 function currentWeather(city) {
   if (!city) {
-    return};
+    return;
+  }
 
-  // const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
   const queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
 
@@ -129,7 +144,6 @@ function uvIndex(response) {
 
 //this function retrieves api forecast data and creates elements to populate the 5 day forecast cards with api data.
 function forecastWeather(city) {
-  
   //displays the weather forecast cards
   $("#weather-forecast").empty();
   const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
@@ -143,7 +157,6 @@ function forecastWeather(city) {
     let forecastResult = response.list;
 
     for (let i = 0; i < forecastResult.length; i++) {
-      console.log(forecastResult);
       if (forecastResult[i].dt_txt.indexOf("12:00:00") !== -1) {
         // convert temp to fahrenheit
         let temp = (forecastResult[i].main.temp - 273.15) * 1.8 + 32;
@@ -175,13 +188,15 @@ function forecastWeather(city) {
   });
 }
 
-// function init() {
-//   if (!localStorage) {
-//     return;
-//   } else {
-//     localStorage.getItem("savedCities");
-//     console.log(savedCities)
-//   }
-// }
+function init() {
+  let storedCities = JSON.parse(localStorage.getItem("savedCities"));
+  if (storedCities) {
+    savedCities = storedCities;
+  }
+  // $(".input").val(storedCities[storedCities.length - 1]);
+  renderCitySearchList();
+  // currentWeather();
+  // forecastWeather();
+}
 
-// window.onload = init()
+window.onload = init();
