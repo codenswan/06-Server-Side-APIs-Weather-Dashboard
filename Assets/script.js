@@ -20,12 +20,14 @@ function renderCitySearchList() {
 }
 
 //clears localStorage and removes hidden attribute to reveal the weather and forecast data
-$("#clear-local-storage").on("click", function () {
+$("#clear-local-storage").on("click", function (event) {
+  event.preventDefault();
   localStorage.clear();
   savedCities = []
   $("#saved-searches").empty();
-  $("#weather-data").removeAttr("hidden");
-  $("#forecast-data").removeAttr("hidden");
+  $("#weather-data").attr("hidden", true);
+  $("#forecast-data").attr("hidden", true);
+  init();
 });
 
 //this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
@@ -147,7 +149,7 @@ function uvIndex(response) {
 
 //this function retrieves api forecast data and creates elements to populate the 5 day forecast cards with api data.
 function forecastWeather(city) {
-  
+
   //displays the weather forecast cards
   $("#weather-forecast").empty();
   const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
@@ -198,13 +200,13 @@ function init() {
   let storedCities = JSON.parse(localStorage.getItem("savedCities"));
   if (storedCities) {
     savedCities = storedCities;
+    let lastCity = savedCities[savedCities.length - 1]
+    currentWeather(lastCity);
+    forecastWeather(lastCity);
+    renderCitySearchList();
+    $("#weather-data").removeAttr("hidden");
+    $(".container").removeAttr("hidden");
   }
-  let lastCity = savedCities[savedCities.length - 1]
-  currentWeather(lastCity);
-  forecastWeather(lastCity);
-  renderCitySearchList();
-  $("#weather-data").removeAttr("hidden");
-  $(".container").removeAttr("hidden");
 }
 
 window.onload = init();
