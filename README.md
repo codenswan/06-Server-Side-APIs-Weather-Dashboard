@@ -6,7 +6,11 @@ This weather dashboard utilises data provided by the open weather api (https://o
   - 5 day weather forecast https://openweathermap.org/forecast5
   
 Below is a screenshot of the deployed app.
+
 ![](Assets/Screen%20Shot%202020-06-30%20at%202.10.47%20pm.png)
+
+# Application Purpose
+This app helps a user plan a trip or an outing by providing current weather data for that day. The app also provides a 5 day forecast showing weather data from 12pm for each of the 5 days.
   
 # Application Features
 This application uses bulma without any independent css styling. The html that displays the weather data is all rendered through javascript. I've used both vanilla js and jquery in the application. The reason for mixing the two was for practise purposes. When the user searches for a city the weather for that current day as well as a 5 day forecast is displayed. All searched cities are added to a search list displayed on screen as well as being added to localstorage for future use. When a previous city search is selected from the list new weather data is retrieved and displayed for that particular city. When the page is refreshed the last searched for city will be displayed upon reload.
