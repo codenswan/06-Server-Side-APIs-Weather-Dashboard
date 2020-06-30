@@ -9,7 +9,7 @@ Below is a screenshot of the deployed app.
 ![](Assets/Screen%20Shot%202020-06-30%20at%202.10.47%20pm.png)
   
 # Application Features
-This application uses bulma without any independent css styling. The html that displays the weather data is all rendered through javascript. When the user searches for a city the weather for that current day as well as a 5 day forecast is displayed. All searched cities are added to a search list displayed on screen as well as being added to localstorage for future use. When a previous city search is selected from the list new weather data is retrieved and displayed for that particular city. When the page is refreshed the last searched for city will be displayed upon reload.
+This application uses bulma without any independent css styling. The html that displays the weather data is all rendered through javascript. I've used both vanilla js and jquery in the application. The reason for mixing the two was for practise purposes. When the user searches for a city the weather for that current day as well as a 5 day forecast is displayed. All searched cities are added to a search list displayed on screen as well as being added to localstorage for future use. When a previous city search is selected from the list new weather data is retrieved and displayed for that particular city. When the page is refreshed the last searched for city will be displayed upon reload.
 
 # Future Changes
 There are a couple of things I would like to change and/or update in future versions of this app:
