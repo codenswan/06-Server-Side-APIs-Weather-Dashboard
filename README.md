@@ -9,14 +9,18 @@ Below is a screenshot of the deployed app.
 ![](Assets/Screen%20Shot%202020-06-30%20at%202.10.47%20pm.png)
   
 # Application Features
-After completing your first city search current and future weather data is displayed on the screen, and the city searched is added to your recent cities on the left hand side of the page. The last searched for city information is stored in localStorage, allowing you to refresh the page and still have the previously searched cities displayed as well as the previous city weather information still displayed on the page. Additionally, if you search for a city multiple times it will only be added to the search history once.
+This application uses bulma without any independent css styling. The html that displays the weather data is all rendered through javascript. When the user searches for a city the weather for that current day as well as a 5 day forecast is displayed. All searched cities are added to a search list displayed on screen as well as being added to localstorage for future use. When a previous city search is selected from the list new weather data is retrieved and displayed for that particular city. When the page is refreshed the last searched for city will be displayed upon reload.
 
 # Future Changes
 There are a couple of things I would like to change and/or update in future versions of this app:
 
-Calling up local weather upon document's first load: because the window information tied to this is in lon/lat rather than city name information, I would have to write a completely new way of performing city search on the page's first load. With the time crunch I decided that this would have to be completed at a later date.
+- currently when a city is searched for more than once the city is listed in saved searches which causes a redundant listing. A small function needs to be added to determine if a city has already been searched for and if it has to not repeat the search.
 
-Creating layout elements dynamically, rather than having them available to be appended to on first search: because the local weather does not appear on first load, the landing page looks sloppy until you've searched for your first city.
+- a button switching between celcius and fahrenheit would be a great feature to add. I'd have to either use an completely new ajax function using a query url with imperial measurment in it, or run conversion calcuations within the javascript.
+
+- I think another important feature to include would be an extra field that informs the user which country the city is in. For e.g. when searching for "Melbourne" there information displayed to determine if Melbourne is in Australia or the USA.
+
+- the UV index categories given by the Bureau of Meteorology Australia has 5 categories. To reflect this I would need to include another 2 if statements as well as additional colour coding.
 
 # Link To Application
 https://codenswan.github.io/06-Server-Side-APIs-Weather-Dashboard/
