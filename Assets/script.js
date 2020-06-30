@@ -19,12 +19,13 @@ function renderCitySearchList() {
   }
 }
 
+//clears localStorage and removes hidden attribute to reveal the weather and forecast data
 $("#clear-local-storage").on("click", function () {
   localStorage.clear();
   savedCities = []
   $("#saved-searches").empty();
   $("#weather-data").removeAttr("hidden");
-  $(".container").removeAttr("hidden");
+  $("#forecast-data").removeAttr("hidden");
 });
 
 //this click event makes active the selected city from the save list and repopulates the weather data card with the correct data
@@ -38,7 +39,7 @@ $("#saved-searches").on("click", "a", function () {
   $(".container").removeAttr("hidden");
 });
 
-// this function allows submit on enter key press
+// this function allows submit on enter key press and triggers the search button function
 $("#city-search").keypress(function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();
@@ -46,6 +47,7 @@ $("#city-search").keypress(function (event) {
   }
 });
 
+//search button function that triggers the 3 main function for the weather app
 $("#search-btn").on("click", function () {
   $("#weather-data").removeAttr("hidden");
   $(".container").removeAttr("hidden");
@@ -53,6 +55,7 @@ $("#search-btn").on("click", function () {
   savedCities.push(city);
   localStorage.setItem("savedCities", JSON.stringify(savedCities));
   
+  //three main functions for this app that gets weather and forecast data, and displays the data in the localStorage
   currentWeather(city);
   forecastWeather(city);
   renderCitySearchList();
@@ -87,7 +90,7 @@ function currentWeather(city) {
       document.querySelector("#current-weather-pic").alt =
         response.weather[0].description;
 
-      //Converts temp to fahrenheit and displays weather data
+      //Converts temp to fahrenheit and displays other weather data
       let tempF = (response.main.temp - 273.15) * 1.8 + 32;
       document.querySelector(
         "#current-temp"
@@ -107,7 +110,7 @@ function currentWeather(city) {
 
 //the lat and lon info from the ajax response in the previous function is pass into uvIndex to get the correct city's data
 function uvIndex(response) {
-  // const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
+  
   const queryURL = `http://api.openweathermap.org/data/2.5/uvi?${apiKey}&lat=${response.coord.lat}&lon=${response.coord.lon}`;
 
   $.ajax({
@@ -144,6 +147,7 @@ function uvIndex(response) {
 
 //this function retrieves api forecast data and creates elements to populate the 5 day forecast cards with api data.
 function forecastWeather(city) {
+  
   //displays the weather forecast cards
   $("#weather-forecast").empty();
   const apiKey = "&appid=37c46c36e443323326f2545ed2229ed9";
@@ -162,6 +166,7 @@ function forecastWeather(city) {
         let temp = (forecastResult[i].main.temp - 273.15) * 1.8 + 32;
         let tempF = Math.floor(temp);
 
+        // creates column 
         const dayCol = $("<div>").addClass(
           "column mt-6 mx-3 has-background-info"
         );
@@ -188,15 +193,18 @@ function forecastWeather(city) {
   });
 }
 
+// initialise app function to get and display localStorage 
 function init() {
   let storedCities = JSON.parse(localStorage.getItem("savedCities"));
   if (storedCities) {
     savedCities = storedCities;
   }
-  // $(".input").val(storedCities[storedCities.length - 1]);
+  let lastCity = savedCities[savedCities.length - 1]
+  currentWeather(lastCity);
+  forecastWeather(lastCity);
   renderCitySearchList();
-  // currentWeather();
-  // forecastWeather();
+  $("#weather-data").removeAttr("hidden");
+  $(".container").removeAttr("hidden");
 }
 
 window.onload = init();

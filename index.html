@@ -4,22 +4,24 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Weather Forecast</title>
+    <title>Weather Dashboard</title>
+    <!-- style sheet CDN for bulma framework-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" href="Assets/styles.css" />
-
+    
 </head>
 
 <body>
+    <!-- this is the banner section -->
     <section class="hero is-primary has-text-centered">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-size-1">
+                    <!-- fa-spin makes the font awesome icons rotate -->
                     <i class="fa fa-sun fa-spin fa-1x"></i> Weather Dashboard
                     <i class="fa fa-snowflake fa-spin fa-1x"></i>
                 </h1>
                 <h2 class="subtitle">
-                    Plan your next outing
+                    Plan Your Next Outing
                 </h2>
             </div>
         </div>
@@ -27,7 +29,9 @@
 
     <section>
         <div class="container mt-6">
+            <!-- nested columns to display proportionately across the page  -->
             <div class="columns">
+                <!-- this column holds the panel with search build and previous city buttons -->
                 <div class="column is-4">
                     <nav class="panel">
                         <p class="panel-heading">
@@ -36,7 +40,7 @@
                         <div class="panel-block has-addons">
                             <p class="control has-icons-left">
                                 <input id="city-search" class="input is-small" type="text"
-                                    placeholder="Enter your city here">
+                                    placeholder="Enter your city here...">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-search" aria-hidden="true"></i>
                                 </span>
@@ -45,11 +49,12 @@
                                 <button type="submit" class="button is-info is-small" id="search-btn">GO</button>
                             </div>
                         </div>
-
+                        <!-- div that receives the cities searched for -->
                         <div id="saved-searches">
 
 
                         </div>
+                        <!-- panel block for the reset button to clear local storage -->
                         <div class="panel-block">
                             <button class="button is-link is-outlined is-fullwidth" id="clear-local-storage">
                                 Reset
@@ -57,7 +62,7 @@
                         </div>
                     </nav>
                 </div>
-
+                <!-- this column holds both the current weather data card and forecast data -->
                 <div class="column is-8">
                     <div hidden class="card" id="weather-data">
                         <div class="card-content">
@@ -74,40 +79,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <div hidden class="container" >
-                        <h1 class="mt-6">5 day forecast:</h1>
+                    <!-- new container to hold columns that display 5 day forecast -->
+                    <div hidden class="container" id="forecast-data">
+                        <h1 class="mt-6 is-size-4">5 day forecast:</h1>
                         <div class="columns" id="weather-forecast">
-                            <div class="column mt-6 mx-3 has-background-info" id="day-1">
-                                <p id="forecast-date1"></p>
-                                <img src="https://openweathermap.org/img/w/10n.png">
-                                <p class="card-text" id="forecast-temp"></p>
-                                <p class="card-text" id="forecast-humidity"></p>
-                            </div>
-                            <div class="column mt-6 mx-3 has-background-info">
-                                <p id="forecast-date2"></p>
-                                <img src="https://openweathermap.org/img/w/10n.png">
-                                <p class="card-text forecastTemp">Temp: 55 °F</p>
-                                <p class="card-text forecastHumidity">Humidity: 67%</p>
-                            </div>
-                            <div class="column mt-6 mx-3 has-background-info">
-                                <p id="forecast-date3"></p>
-                                <img src="https://openweathermap.org/img/w/10n.png">
-                                <p class="card-text forecastTemp">Temp: 55 °F</p>
-                                <p class="card-text forecastHumidity">Humidity: 67%</p>
-                            </div>
-                            <div class="column mt-6 mx-3 has-background-info">
-                                <p id="forecast-date4"></p>
-                                <img src="https://openweathermap.org/img/w/10n.png">
-                                <p class="card-text forecastTemp">Temp: 55 °F</p>
-                                <p class="card-text forecastHumidity">Humidity: 67%</p>
-                            </div>
-                            <div class="column mt-6 mx-3 has-background-info">
-                                <p id="forecast-date5"></p>
-                                <img src="https://openweathermap.org/img/w/10n.png">
-                                <p class="card-text forecastTemp">Temp: 55 °F</p>
-                                <p class="card-text forecastHumidity">Humidity: 67%</p>
-                            </div>
+                            <!--  -->
                         </div>
                     </div>
                 </div>
@@ -121,34 +97,3 @@
 </body>
 
 </html>
-
-<!-- <div class="column mt-6 mx-3 has-background-info" id="day-1">
-
-    <img src="">
-    <p class="card-text" id="forecast-temp"></p>
-    <p class="card-text" id="forecast-humidity"></p>
-</div>
-<div class="column mt-6 mx-3 has-background-info">
-    <p id="forecast-date2"></p>
-    <img src="https://openweathermap.org/img/w/10n.png">
-    <p class="card-text forecastTemp">Temp: 55 °F</p>
-    <p class="card-text forecastHumidity">Humidity: 67%</p>
-</div>
-<div class="column mt-6 mx-3 has-background-info">
-    <p id="forecast-date3"></p>
-    <img src="https://openweathermap.org/img/w/10n.png">
-    <p class="card-text forecastTemp">Temp: 55 °F</p>
-    <p class="card-text forecastHumidity">Humidity: 67%</p>
-</div>
-<div class="column mt-6 mx-3 has-background-info">
-    <p id="forecast-date4"></p>
-    <img src="https://openweathermap.org/img/w/10n.png">
-    <p class="card-text forecastTemp">Temp: 55 °F</p>
-    <p class="card-text forecastHumidity">Humidity: 67%</p>
-</div>
-<div class="column mt-6 mx-3 has-background-info">
-    <p id="forecast-date5"></p>
-    <img src="https://openweathermap.org/img/w/10n.png">
-    <p class="card-text forecastTemp">Temp: 55 °F</p>
-    <p class="card-text forecastHumidity">Humidity: 67%</p>
-</div> -->
